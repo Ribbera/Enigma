@@ -52,14 +52,14 @@ def descifrar_mensaje(texto_cifrado):
         if rotor1.avanzar():
             if rotor2.avanzar():
                 rotor3.avanzar()
-
+    
         paso = rotor3.reverse(letra)
         paso = rotor2.reverse(paso)
-        paso = rotor1.reverse(letra) 
+        paso = rotor1.reverse(paso)  # <- linea corregida ahora usamos paso correctamente
         mensaje_descifrado += paso
 
     print("Descifrado:", mensaje_descifrado)
-
+    
 def main():
     cifrar_mensaje()
 
