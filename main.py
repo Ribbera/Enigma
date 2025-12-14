@@ -186,7 +186,6 @@ def mostrar_menu():
     print("=" * 50)
     
 def main():
-    print("Simulador sencillo de la Enigma (solo rotores).")
     while True:
         mostrar_menu()
         opcion = input("Elige una opcion: ")
