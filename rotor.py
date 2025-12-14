@@ -1,4 +1,3 @@
-
 class Rotor:
     def __init__(self, wiring, notch='Z', position='A'):
         wiring = wiring.upper()
@@ -28,11 +27,9 @@ class Rotor:
         return False
 
     def forward(self, letter):
-        # Cifra letra
         letra = letter.upper()
         entrada_num = ord(letra) - ord('A')
 
-        # Aplicar offset 
         entrada_con_pos = entrada_num + self.position
         while entrada_con_pos >= 26:
             entrada_con_pos -= 26
@@ -40,11 +37,38 @@ class Rotor:
         letra_wiring = self.wiring[entrada_con_pos]
         salida_num = ord(letra_wiring) - ord('A')
 
+        salida_final = salida_num - self.position
+        while salida_final < 0:
+            salida_final += 26
+
+        return chr(salida_final + ord('A'))
+
+    def reverse(self, letter):
+        letra = letter.upper()
+        entrada_num = ord(letra) - ord('A')
+
+        entrada_con_pos = entrada_num + self.position
+        while entrada_con_pos >= 26:
+            entrada_con_pos -= 26
+
+        letra_buscar = chr(ord('A') + entrada_con_pos)
+
+        indice_en_wiring = -1
+        indice = 0
+        for letra_wiring in self.wiring:
+            if letra_wiring == letra_buscar:
+                indice_en_wiring = indice
+                break
+            indice += 1
+
+        if indice_en_wiring == -1:
+            raise ValueError("No se encontro la letra en el wiring")
+
+        salida_num = indice_en_wiring - self.position
+        while salida_num < 0:
+            salida_num += 26
+
         return chr(salida_num + ord('A'))
 
     def get_position(self):
         return chr(self.position + ord('A'))
-
-if __name__ == "__main__":
-    rotor = Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", "A")
-    print("A ->", rotor.forward('A'))
