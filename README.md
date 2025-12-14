@@ -3,7 +3,7 @@
 Simulador basico de la maquina Enigma hecho para clase de programacion. Permite cifrar y descifrar mensajes de texto y ajustar los tres rotores como en la maquina real.
 
 ## Descripcion rapida del codigo
-- Normalizacion: el texto se pasa a mayusculas, sin acentos ni simbolos, para trabajar solo con A-Z.
+- Normalizacion: el texto se pasa a mayusculas, sin acentos ni simbolos, para trabajar solo con A-Z, y finalmente agrupando las letras en grupos de 5 separadas por un espacio.
 - Rotores: cada letra atraviesa los tres rotores en orden; cada rotor avanza y arrastra al siguiente cuando toca el notch.
 - Archivos: `Missatge.txt` guarda el mensaje original, `Xifrat.txt` el cifrado (en bloques de 5), `Desxifrat.txt` el descifrado.
 - Configuracion: los rotores se cargan desde `Rotor1.txt`, `Rotor2.txt`, `Rotor3.txt`; el menu permite editar wiring y notch.
