@@ -3,11 +3,9 @@ class Rotor:
     def __init__(self, wiring, notch='Z', position='A'):
         wiring = wiring.upper()
 
-        # tiene 26 letras
         if len(wiring) != 26:
             raise ValueError("El wiring debe tener 26 letras")
 
-        # letra por letra 
         letras_vistas = []
         for letra in wiring:
             if letra < 'A' or letra > 'Z':
@@ -20,7 +18,7 @@ class Rotor:
         self.notch = ord(notch.upper()) - ord('A')
         self.position = ord(position.upper()) - ord('A')
 
-    def avanzar(self):        
+    def avanzar(self):
         self.position += 1
         if self.position >= 26:
             self.position = 0
@@ -29,9 +27,24 @@ class Rotor:
             return True
         return False
 
+    def forward(self, letter):
+        # Cifra letra
+        letra = letter.upper()
+        entrada_num = ord(letra) - ord('A')
+
+        # Aplicar offset 
+        entrada_con_pos = entrada_num + self.position
+        while entrada_con_pos >= 26:
+            entrada_con_pos -= 26
+
+        letra_wiring = self.wiring[entrada_con_pos]
+        salida_num = ord(letra_wiring) - ord('A')
+
+        return chr(salida_num + ord('A'))
+
     def get_position(self):
         return chr(self.position + ord('A'))
 
 if __name__ == "__main__":
-    rotor = Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ")
-    print("Rotor validado en posicion", rotor.get_position())
+    rotor = Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", "A")
+    print("A ->", rotor.forward('A'))
