@@ -39,6 +39,27 @@ def cifrar_mensaje():
 
     print("Cifrado:", mensaje_cifrado)
 
+def descifrar_mensaje(texto_cifrado):
+    print("\nDESCIFRADO")
+    ventanas = input("3 letras iniciales: ").upper()
+
+    rotor1 = Rotor.from_file("Rotor1.txt", ventanas[0])
+    rotor2 = Rotor.from_file("Rotor2.txt", ventanas[1])
+    rotor3 = Rotor.from_file("Rotor3.txt", ventanas[2])
+
+    mensaje_descifrado = ""
+    for letra in texto_cifrado:
+        if rotor1.avanzar():
+            if rotor2.avanzar():
+                rotor3.avanzar()
+
+        paso = rotor3.reverse(letra)
+        paso = rotor2.reverse(paso)
+        paso = rotor1.reverse(letra) 
+        mensaje_descifrado += paso
+
+    print("Descifrado:", mensaje_descifrado)
+
 def main():
     cifrar_mensaje()
 
