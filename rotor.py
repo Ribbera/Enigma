@@ -1,6 +1,8 @@
 class Rotor:
     def __init__(self, wiring, notch='Z', position='A'):
         wiring = wiring.upper()
+        notch = notch.upper()
+        position = position.upper()
 
         if len(wiring) != 26:
             raise ValueError("El wiring debe tener 26 letras")
@@ -14,8 +16,8 @@ class Rotor:
             letras_vistas.append(letra)
 
         self.wiring = wiring
-        self.notch = ord(notch.upper()) - ord('A')
-        self.position = ord(position.upper()) - ord('A')
+        self.notch = ord(notch) - ord('A')
+        self.position = ord(position) - ord('A')
 
     def avanzar(self):
         self.position += 1
@@ -62,7 +64,7 @@ class Rotor:
             indice += 1
 
         if indice_en_wiring == -1:
-            raise ValueError("No se encontro la letra en el wiring")
+            raise ValueError("No se encontro la letra")
 
         salida_num = indice_en_wiring - self.position
         while salida_num < 0:
@@ -70,5 +72,32 @@ class Rotor:
 
         return chr(salida_num + ord('A'))
 
+    def set_position(self, position):
+        if isinstance(position, str):
+            position = position.upper()
+            self.position = ord(position) - ord('A')
+        else:
+            self.position = int(position) % 26
+
     def get_position(self):
         return chr(self.position + ord('A'))
+
+    # Con ayuda de IA conseguimos hacer esto
+    @classmethod
+    def from_file(cls, filepath, position='A'):
+        try:
+            with open(filepath, 'r') as archivo:
+                lineas = archivo.readlines()
+        except FileNotFoundError:
+            raise FileNotFoundError(f"No encontre {filepath}")
+
+        if len(lineas) == 0:
+            raise ValueError("Archivo vacio")
+
+        wiring = lineas[0].strip().upper()
+        if len(lineas) > 1:
+            notch = lineas[1].strip().upper()
+        else:
+            notch = 'Z'
+
+        return cls(wiring, notch, position)
