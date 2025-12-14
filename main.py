@@ -94,7 +94,7 @@ def cifrar_mensaje():
     print("Cifrado guardado en Xifrat.txt:", texto_formateado)
     
 
-def descifrar_mensaje(texto_cifrado):
+def descifrar_mensaje():
     #lee el archivo Xifrat.txt y lo pasa hacia atras por lo rotores
     
     print("\n" + "=" * 50)

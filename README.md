@@ -1,39 +1,34 @@
-# Máquina Enigma
+# Maquina Enigma
 
-Este es un simulador basico de la maquina Enigma que hemos hecho para la clase de Programación.
+Simulador basico de la maquina Enigma hecho para clase de programacion. Permite cifrar y descifrar mensajes de texto y ajustar los tres rotores como en la maquina real.
 
-Permite cifrar mensajes de texto plano y tambien descifrarlos si ya estan encriptados. Ademas, se pueden configurar tres rotores con posiciones iniciales, y editar la configuracion de los rotores si hace falta.
-
-## Descripción
-
-Este proyecto implementa un simulador  de la máquina Enigma que permite:
-- Cifrar mensajes de texto
-- Descifrar mensajes cifrados
-- Configurar 3 rotores con posiciones iniciales
-- Editar la configuración de los rotores
+## Descripcion rapida del codigo
+- Normalizacion: el texto se pasa a mayusculas, sin acentos ni simbolos, para trabajar solo con A-Z.
+- Rotores: cada letra atraviesa los tres rotores en orden; cada rotor avanza y arrastra al siguiente cuando toca el notch.
+- Archivos: `Missatge.txt` guarda el mensaje original, `Xifrat.txt` el cifrado (en bloques de 5), `Desxifrat.txt` el descifrado.
+- Configuracion: los rotores se cargan desde `Rotor1.txt`, `Rotor2.txt`, `Rotor3.txt`; el menu permite editar wiring y notch.
 
 ## Archivos del proyecto
+- `main.py`: menu interactivo y flujo principal.
+- `rotor.py`: clase Rotor con giro, forward y reverse.
+- `Rotor1.txt`, `Rotor2.txt`, `Rotor3.txt`: configuracion de wiring y notch de cada rotor.
+- `Missatge.txt`: mensaje original.
+- `Xifrat.txt`: mensaje cifrado.
+- `Desxifrat.txt`: mensaje descifrado.
 
-- `main.py`: Programa principal, con un menu interactivo para elegir que hacer.
-- `rotor.py`: Clase Rotor que simula como gira y encripta un rotor individual.
-- `Rotor1.txt`, `Rotor2.txt`, `Rotor3.txt`: Archivos de configuración de rotores.
-- `Missatge.txt`: Mensaje original.
-- `Xifrat.txt`: Mensaje cifrado.
-- `Desxifrat.txt`: Mensaje descifrado.
-
-## Cómo usar
-
+## Como usar
 ```bash
 python main.py
 ```
-
-Después elige una opción del menú:
+En el menu elige:
 1. Cifrar mensaje
 2. Descifrar mensaje
 3. Editar rotores
 4. Salir
 
 ## Requisitos
-
 - Python 3.6 o superior
-- No es necesario ningún requirments.txt
+- No hace falta requirements.txt
+
+## Nota sobre IA y buenas practicas
+- Antes de cada commit repasamos el codigo con ayuda de IA para aplicar buenas practicas y mantenerlo limpio.
