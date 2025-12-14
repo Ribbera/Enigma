@@ -20,6 +20,15 @@ class Rotor:
         self.notch = ord(notch.upper()) - ord('A')
         self.position = ord(position.upper()) - ord('A')
 
+    def avanzar(self):        
+        self.position += 1
+        if self.position >= 26:
+            self.position = 0
+
+        if self.position == self.notch:
+            return True
+        return False
+
     def get_position(self):
         return chr(self.position + ord('A'))
 
