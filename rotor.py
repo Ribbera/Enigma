@@ -1,7 +1,22 @@
 
 class Rotor:
     def __init__(self, wiring, notch='Z', position='A'):
-        self.wiring = wiring.upper()
+        wiring = wiring.upper()
+
+        # tiene 26 letras
+        if len(wiring) != 26:
+            raise ValueError("El wiring debe tener 26 letras")
+
+        # letra por letra 
+        letras_vistas = []
+        for letra in wiring:
+            if letra < 'A' or letra > 'Z':
+                raise ValueError("Solo letras A-Z")
+            if letra in letras_vistas:
+                raise ValueError("No se pueden repetir letras")
+            letras_vistas.append(letra)
+
+        self.wiring = wiring
         self.notch = ord(notch.upper()) - ord('A')
         self.position = ord(position.upper()) - ord('A')
 
@@ -9,5 +24,5 @@ class Rotor:
         return chr(self.position + ord('A'))
 
 if __name__ == "__main__":
-    rotor = Rotor("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    print("Rotor creado en posicion", rotor.get_position())
+    rotor = Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ")
+    print("Rotor validado en posicion", rotor.get_position())
